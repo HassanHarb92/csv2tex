@@ -18,35 +18,33 @@ filename1 = sys.argv[1]
 n_lines = 0
 n_columns = 0
 
+print "Simple code to convert csv tables to tex!"
+print "Last edited by Hassan Harb, Oct 17, 2020"
+print "Input file: ", filename1
+
 with open(filename1,'r') as input:
      for line in input:
          inputline = line.split(",")
-         print "length = ", len(inputline)
          n_lines = n_lines + 1
          n_columns = len(inputline)
 
-print "Total number of rows = ", n_lines
-print "Total number of columns = ", n_columns
-
 n_table = n_lines * n_columns
 rawtable = [" " for i in range(n_table)]
-print rawtable
 
 counter = 0
 with open(filename1,'r') as input:
      for line in input:
          inputline = line.split(",")
          for entry in range (n_columns):
-             print inputline[entry]
              rawtable[counter] = inputline[entry].decode('utf-8-sig')
              counter = counter + 1
 
-print rawtable 
 filename2 = os.path.splitext(filename1)[0] + ".tex"
+
+print "Output file: ", filename2
 
 counter = 0
 l_column = ["l " for i in range(n_columns)]
-print "l column = ", l_column
 
 with open(filename2,'w') as output:
      output.write("\\begin{table}\n")
@@ -74,16 +72,4 @@ with open(filename2,'w') as output:
      output.write("\n\\caption{Insert caption here}")
      output.write("\n\\end{table}\n")
 
-#with open(filename2,'r') as texin:
-#     table = texin.read()
-#     table = table.replace('^M','')
-#     print table 
-#     texin.close()
-#
-#print table
-#
-#texout = open(filename2,'wt')
-#texout.write(table)
-
-
- 
+print "All done!"
